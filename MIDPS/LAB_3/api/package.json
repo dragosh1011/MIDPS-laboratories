@@ -1,0 +1,16 @@
+{
+  "name": "football-tournament",
+  "version": "0.0.1",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --harmony-async-await server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "koa": "2",
+    "koa-bodyparser": "3",
+    "koa-router": "next"
+  }
+}
