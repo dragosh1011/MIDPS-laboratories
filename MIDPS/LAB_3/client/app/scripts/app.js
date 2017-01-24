@@ -16,7 +16,8 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('/dashboard', '/dashboard/overview');
+    $urlRouterProvider.when('/', '/teams');
+    $urlRouterProvider.when('', '/teams');
     $urlRouterProvider.otherwise('/404');
 
     $stateProvider

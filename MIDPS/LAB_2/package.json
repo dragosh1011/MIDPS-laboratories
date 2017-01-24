@@ -1,0 +1,21 @@
+{
+  "name": "your-app",
+  "version": "0.1.0",
+  "main": "index.js",
+  "devDependencies": {
+    "electron": "^1.4.14"
+  },
+  "dependencies": {
+    "jspm": "^0.16.48"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "dependencies": {},
+    "devDependencies": {
+      "traceur": "github:jmcriffey/bower-traceur@0.0.93",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.93"
+    }
+  }
+}
