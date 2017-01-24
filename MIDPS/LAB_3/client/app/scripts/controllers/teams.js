@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('TeamsCtrl', function($scope, $filter) {
+  .controller('TeamsCtrl', function($scope, $filter, teamService) {
     $scope.dataTableThead = [
       {
         name: 'name',
@@ -76,25 +76,10 @@ angular.module('app')
       {
         name: 'founder'
       }];
-    $scope.teams = [
-      {
-        name: 'test',
-        location: 'test',
-        founded: 'test',
-        founder: 'test'
-      },
-      {
-        name: 'test',
-        location: 'test',
-        founded: 'test',
-        founder: 'test'
-      },
-      {
-        name: 'test',
-        location: 'test',
-        founded: 'test',
-        founder: 'test'
-      }
-    ]
+    $scope.teams = teamService.teams;
+
+    $scope.$on('TEAMS_RETRIEVED', () => {
+      $scope.teams = teamService.teams;
+    });
 
   });

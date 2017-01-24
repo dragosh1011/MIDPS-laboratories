@@ -50,7 +50,8 @@ angular
       .state('register', {
         url: '/register',
         parent: 'menu',
-        templateUrl: 'views/registration.html'
+        templateUrl: 'views/registration.html',
+        controller: 'RegisterCtrl'
       })
       .state('feedback', {
         url: '/feedback',

@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('app')
-  .controller('FeedbackCtrl', function($scope) {
+  .controller('FeedbackCtrl', function($scope, feedbackService) {
     init();
     $scope.submit = function() {
+      feedbackService.registerFeedback({email: $scope.email, message: $scope.message});
       init();
-      return false;
     };
 
     function init() {

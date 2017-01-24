@@ -11,6 +11,8 @@
   "dependencies": {
     "koa": "2",
     "koa-bodyparser": "3",
-    "koa-router": "next"
+    "koa-router": "next",
+    "koa-static": "^2.0.0",
+    "mongoose": "^4.7.8"
   }
 }

@@ -13,18 +13,6 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('.tmp/styles'));
 });
 
-gulp.task('jshint', function() {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.jshint())
-    //.pipe($.jshint.reporter('jshint-stylish'))
-    //.pipe($.jshint.reporter('fail'));
-});
-
-gulp.task('jscs', function() {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.jscs());
-});
-
 gulp.task('html', ['styles'], function() {
   var lazypipe = require('lazypipe');
   var cssChannel = lazypipe()
@@ -46,10 +34,6 @@ gulp.task('html', ['styles'], function() {
 
 gulp.task('images', function() {
   return gulp.src('app/images/**/*')
-    // .pipe($.cache($.imagemin({
-    //   progressive: true,
-    //   interlaced: true
-    // })))
     .pipe(gulp.dest('dist/images'));
 });
 
@@ -117,10 +101,6 @@ gulp.task('wiredep', function() {
   gulp.src('app/*.html')
     .pipe(wiredep({exclude: exclude}))
     .pipe(gulp.dest('app'));
-
-  gulp.src('test/*.js')
-    .pipe(wiredep({exclude: exclude, devDependencies: true}))
-    .pipe(gulp.dest('test'));
 });
 
 gulp.task('watch', ['connect'], function() {
@@ -138,17 +118,11 @@ gulp.task('watch', ['connect'], function() {
   gulp.watch('bower.json', ['wiredep']);
 });
 
-gulp.task('builddist', ['jshint', 'jscs', 'html', 'images', 'fonts', 'extras'],
+gulp.task('builddist', ['html', 'images', 'fonts', 'extras'],
   function() {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('build', ['clean'], function() {
   gulp.start('builddist');
-});
-
-gulp.task('docs', [], function() {
-  return gulp.src('app/scripts/**/**')
-    .pipe($.ngdocs.process())
-    .pipe(gulp.dest('./docs'));
 });

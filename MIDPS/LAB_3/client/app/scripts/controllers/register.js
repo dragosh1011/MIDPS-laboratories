@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('app')
-  .controller('LoginCtrl', function($scope) {
+  .controller('RegisterCtrl', function($scope, teamService) {
+    $scope.team = {
+      name: ''
+    };
 
     $scope.submit = function() {
-
+      teamService.registerTeam($scope.team);
+      $scope.team = {};
       return false;
     }
 
