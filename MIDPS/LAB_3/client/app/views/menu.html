@@ -1,0 +1,22 @@
+<div class="dashboard-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+
+       <div class="text-center">
+        <h2 class="brand">Football tournament</small></h2>
+        <img src="images/soccer_ball.png" class="user-avatar" /><br />
+      </div>
+
+      <ul class="nav nav-sidebar">
+        <li ng-class="{active: $state.includes('teams')}"><a ui-sref="teams">Teams <span class="sr-only">(current)</span></a></li>
+        <li ng-class="{active: $state.includes('Feedback')}"><a ui-sref="feedback">Feedback</a></li>
+        <li ng-class="{active: $state.includes('Register')}"><a ui-sref="register">Register your team</a></li>
+      </ul>
+
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view>
+    </div>
+  </div>
+</div>
+</div>

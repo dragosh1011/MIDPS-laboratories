@@ -1,8 +1,0 @@
-{
-  "name": "your-app",
-  "version": "0.1.0",
-  "main": "index.js",
-  "devDependencies": {
-    "electron": "^1.4.14"
-  }
-}
