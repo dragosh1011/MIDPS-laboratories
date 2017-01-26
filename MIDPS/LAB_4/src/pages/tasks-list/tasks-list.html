@@ -1,5 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-navbar *ngIf="title === 'All'">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>All tasks</ion-title>
+  </ion-navbar>
+  <ion-toolbar *ngIf="title !== 'All'">
     <ion-title>
       {{title}} tasks
     </ion-title>

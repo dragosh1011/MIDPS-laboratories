@@ -15,7 +15,9 @@ export class TasksList {
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams, private taskService: TasksService) {
     this.title = this.navParams.get('state');
-    this.title = 'All';
+    if (!this.title) {
+      this.title = 'All';
+    }
     this.filterData()
   }
 
