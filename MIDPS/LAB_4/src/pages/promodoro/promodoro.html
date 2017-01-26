@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pomodoro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="row task-title">
+  {{ task.title }}
+  </div>
+  <div class="row">
+    <timer id="timer" class="countdown" autostart="false" end-time="timer">{{minutes}}:{{sseconds}}</timer>
+  </div>
+
+  <div class="row message">
+    {{ message }}
+  </div>
+
+  <button *ngIf="continue" class="button button-small button-balanced"
+          ng-click="updateTimer(120000)">
+    Continue
+  </button>
+
+</ion-content>
