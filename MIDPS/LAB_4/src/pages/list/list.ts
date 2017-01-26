@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { TasksService } from '../../services/tasks';
 
-import { ItemDetailsPage } from '../item-details/item-details';
+import { NewTask } from '../new-task/new-task';
+import { TasksList } from '../tasks-list/tasks-list';
 
 
 @Component({
@@ -11,29 +13,47 @@ import { ItemDetailsPage } from '../item-details/item-details';
 })
 export class ListPage {
   selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  total: any;
+  estimates: Array<number>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  constructor(public modalCtrl: ModalController, private taskService: TasksService) {
+    this.total = taskService.total;
+    this.estimates = [1,2,3,4];
   }
 
-  itemTapped(event, item) {
-    this.navCtrl.push(ItemDetailsPage, {
-      item: item
+  newTaskModal() {
+    let modal = this.modalCtrl.create(NewTask);
+    modal.onDidDismiss(task => {
+      console.log(task);
+      if (task && task.title && task.title.length) {
+        this.taskService.create(task)
+      }
     });
+
+    modal.present();
+  }
+
+  showToday() {
+    let modal = this.modalCtrl.create(TasksList, {state: 'Today'});
+    modal.onDidDismiss(task => {
+      console.log(task);
+      if (task && task.title && task.title.length) {
+        this.taskService.create(task)
+      }
+    });
+
+    modal.present();
+  }
+
+  showInventory() {
+    let modal = this.modalCtrl.create(TasksList, {state: 'Inventory'});
+
+    modal.present();
+  }
+
+  showHistory() {
+    let modal = this.modalCtrl.create(TasksList, {state: 'History'});
+
+    modal.present();
   }
 }

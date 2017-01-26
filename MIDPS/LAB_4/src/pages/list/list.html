@@ -3,18 +3,32 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>My First List</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon name="{{item.icon}}" item-left></ion-icon>
-      {{item.title}}
+    <button ion-item (click)="showToday($event)">
+      Today
       <div class="item-note" item-right>
-        {{item.note}}
+        {{total.today}}
       </div>
+    </button>
+    <button ion-item (click)="showInventory($event)">
+      Inventory
+      <div class="item-note" item-right>
+        {{total.inventory}}
+      </div>
+    </button>
+    <button ion-item (click)="showHistory($event)">
+      History
+      <div class="item-note" item-right>
+        {{total.history}}
+      </div>
+    </button>
+    <button ion-item (click)="newTaskModal($event)">
+      New task
     </button>
   </ion-list>
   <div *ngIf="selectedItem" padding>

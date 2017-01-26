@@ -4,7 +4,7 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { RegisterPage } from '../pages/register/register';
+import { TasksList } from '../pages/tasks-list/tasks-list';
 import { ListPage } from '../pages/list/list';
 import { FeedbackPage } from '../pages/feedback/feedback';
 
@@ -27,8 +27,8 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Teams list', component: ListPage },
-      { title: 'Register', component: RegisterPage },
+      { title: 'Home', component: ListPage },
+      { title: 'Task List', component: TasksList },
       { title: 'Feedback', component: FeedbackPage }
     ];
   }
