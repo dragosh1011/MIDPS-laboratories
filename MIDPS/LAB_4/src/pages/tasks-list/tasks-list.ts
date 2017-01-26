@@ -12,10 +12,10 @@ import { TasksService } from '../../services/tasks';
 export class TasksList {
   tasks: any;
   title: string;
-  arrayOfKeys: Array<string>;
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams, private taskService: TasksService) {
     this.title = this.navParams.get('state');
+    this.title = 'All';
     this.filterData()
   }
 
@@ -27,6 +27,8 @@ export class TasksList {
       }
       let task = this.taskService.tasksList[id];
       if (task.status === this.title) {
+        this.tasks.push(task)
+      } else if (this.title === 'All' ){
         this.tasks.push(task)
       }
     }
