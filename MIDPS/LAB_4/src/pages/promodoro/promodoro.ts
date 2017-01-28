@@ -15,9 +15,9 @@ export class Promodoro {
   task: any;
   timerValue: number;
   message: string;
-  workTime = 25 * 60;
-  breakTime = 5 * 60;
-  longBreakTime = 15 * 60;
+  workTime = 0.5 * 60;
+  breakTime = 0.5 * 60;
+  longBreakTime = 0.5 * 60;
   workMessage = 'Work on your task';
   breakMessage = 'Take a short brake';
   longBreakMessage = 'Take a long brake';
