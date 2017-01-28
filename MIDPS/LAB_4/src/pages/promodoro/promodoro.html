@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pomodoro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <h1>{{ task.title }}</h1>
+  <div class="row">
+    {{ message }}
+  </div>
+
+  <timer #timer [timeInSeconds]="timerValue" (timerFinished)="onTimerFinished($event)" (timerStarted)="onTimerStarted($event)"></timer>
+
+  <div *ngIf="message === pauseMessage">
+    <button ion-button color="secondary" full (click)="dismiss()">No, this task is done</button>
+    <button ion-button color="primary" full (click)="timer.startTimer()">Yes, I want to continue working on task</button>
+  </div>
+
+</ion-content>
