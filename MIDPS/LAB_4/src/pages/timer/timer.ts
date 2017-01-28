@@ -42,9 +42,7 @@ export class TimerComponent {
   startTimer() {
     this.timer.hasStarted = true;
     this.timer.runTimer = true;
-    console.log(1);
     this.timerStarted.emit({});
-    console.log(2)
     this.timerTick();
   }
 

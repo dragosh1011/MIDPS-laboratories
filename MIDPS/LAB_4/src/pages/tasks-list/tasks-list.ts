@@ -35,7 +35,6 @@ export class TasksList {
         this.tasks.push(task)
       }
     }
-    console.log(this.tasks)
   }
 
   dismiss() {

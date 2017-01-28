@@ -23,7 +23,6 @@ export class ListPage {
   newTaskModal() {
     let modal = this.modalCtrl.create(NewTask);
     modal.onDidDismiss(task => {
-      console.log(task);
       if (task && task.title && task.title.length) {
         this.taskService.create(task)
       }
