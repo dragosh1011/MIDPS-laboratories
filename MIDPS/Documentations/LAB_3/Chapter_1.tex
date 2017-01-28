@@ -3,51 +3,72 @@
 \subsection{Tasks and Points}
 
 \begin{itemize}
-	\item Aplicatia trebuie sa fie dezvoltata si testata cu orice SDK ce include Emulator
-	\item Testarea aplicatiei pe un device real
-	\item Aplicatia trebuie sa suporte device-urile cu diferite rezolutii
-	\item Realizeaza o aplicatie care va implimenta tehnica Pomodoro
-	\item Foloseste libraria cross platform pentru a realiza o apliacatie cross platform (aplicatia poate fi compilata atit pe Android, cit si pe iOS)
+	\item Crearea unui mini site cu pagini statice
+	\item Pentru formatarea paginilor se va folosi CSS
+	\item Site-ul trebuie sa contina AJAX Requests.
+	\item Implimentarea XHR sau JSON responses. Careva din informatie trebuie sa fie dinamic incarcata pe pagina.
+	\item Site-ul trebuie sa contina AJAX Requests.
 \end{itemize}
 
 \subsection{Analiza lucrarii de laborator}
 
-Repository \url{https://github.com/dragosh1011/MIDPS-laboratories/tree/master/MIDPS/LAB_4}{link}
+Repository \url{https://github.com/dragosh1011/MIDPS-laboratories/tree/master/MIDPS/LAB_3}{link}
 
-Primul pas în elaborarea aplicației a fost alegerea unui sdk. Am optat pentru ionic 2\cite{ionic}, deoarece permite compilare pentru diferite dispozitive și este bazat pe ultimele tehnolgii, utilizînd angular 2 și typescript. Următorul pas a fost generarea unui template automat și analizarea lui, precum și trecerea rapidă prin documentație pentru a ști ce componente pot utiliza la dezvoltarea aplicațieie și prin ionic-cli\cite{ionic-cli} pentru a vedea cum se face emularea aplicației și care este modul de dezvoltare.
+Primul pas in dezvoltarea aplicatie a constat in alegerea tehnologiilor pe care sa le folosesc in procesul de development. 
+Pentru partea de front-end am optat pentru angular\cite{angular}, care este un framework destul de utilizat in domeniu in ultimii ani, gulp\cite{gulp} ca task manager si bower\cite{bower} ca package manager. Pentru ui am folosit lumx\cite{lumx}, care este o librarie pe angular bazata pe material design si care permite utilizarea mai multor elemente care au un efect vizual placut si un impact pozitiv ce tine de user expirience. 
 
-Al doilea pas a fost documentarea despre tehnica promodoro\cite{promodoro} și determinarea componentelor necesare. 
+Pentru partea de server, am preferat node js\cite{node} si am utilizat frameworkul koa 2\cite{koa}, care are un api simplu si este destul de usor de utilizat. Datele aplicatiie sunt salvate in mongodb\cite{mongodb}, o baza de date non-relationala, utilizand mongoose ODM\cite{mongoose}.
 
-După aceste etape am putut să încep procesul de dezvoltare a aplicației. Mai întîi am creat prima pagina care reprezintă o listă de butoane care permit trecerea pe paginile cu fiecare tip de taskuri in parte precum și butonul care deschide pagina de creare a unui task. Prima problemă pe care am întîlnit-o a fost lipsa cunoștințelor suficiente în angular 2\cite{angular2} și diferențele majore față de angular 1. De asemenea, am avut careva dificultăți cu limbajul typescript care nu are un tip de date Object. Crearea unui service pentru taskuri a fost urmaorul pas, astfel încît taskurile să fie stocate întrun singur loc și să fie în aceiași stare în toate componentele aplicației. 
+Urmatorul pas a fost crearea web siteului. Aplicatia este destul de simpla, ea fiind destinata pentru inregistrarea la un simplu turneu de fotbal. 
 
-Divizarea taskurilor se face în:
+Modulele acestei aplicatii sunt:
 \begin{itemize}
-	\item Today - taskurile care sunt marcate pentru efectuare astăzi
-	\item History - lista taskurilor finisate
-	\item Inventory - lista taskurilor planificate
+	\item teams - lista echipelor inregistrate
+	\item register - inregistrarea unei echipe
+	\item feedback - oferirea unui feedback organizatorului
 \end{itemize}
 
-Un task are structura: 
+Pe langa aceste module care reprezinta cate o singura pagina in aplicatie, exista si pagina 404 pentru routele accesate gresit. In prima faza datele de inregistrare erau salvate in team service, iar feedbackurile oferite in feedback service.
+
+A treia etapa a fost crearea un api pentru aplicatia web care sa ofere enpointurile necesare pentru salvarea si obtinerea echipelor inregistrate si pentru salvarea feedbackurilor. Deoarece feedbackurile sunt destinate organizatorului, ele nu sunt afisate in nici un colt al aplicatie, ci doar sunt salvate in db. La aceasta faza au fost efectuate maimulte lucrari: 
 \begin{itemize}
-	\item id - un simplu unic identifier care reprizinta valoarea functie Date.now()
-	\item status - lunul din tipurile enumerate mai sus
-	\item promodoros - numărul de promodoros care au fost utilizate pentru finisarea taskului
-	\item createdAt - data crearii
-	\item ebdedAt - data finisarii
+	\item definirea structurii aplicatiei
+	\item configurarea bazei de date
+	\item definirea enpointurilor necesare
+	\item definirea modelelor
+	\item craerea functiilor de salvare/extragere a datelor
 \end{itemize}
 
-Urmatorul pas a fost crearea unei pagini simple pentru adaugarea de noi taskuri. Pagina respectiva este formata din titlu, inpu pentru titlu si putoane pentru intorcerea pe pagina inițială și buton pentru crearea taskului. 
+Cea mai mare problema la aceasta etapa a fost configurarea bazei de date, deoarece nu am avut experinte anterioare de utilizare a unei baze de date mongodb, insa documentatia buna a acestora ma ajutat sa nu fiu blocat de aceasta problema foarte mult si am reusit sa o rezolv destuld e repede
 
-Crearea paginii promodoro si a timerului a fost cea mai complicata parte a procesului de dezvoltare. Timerul a fost creat ca o componenta separata care este inclusă în pagina promodoro. Aceasta componenta primeste ca parametru numarul de secunde in care se finiseaza actiunea si ofera ca output evenimente ce pot fi ascultate pentru inceputul si sfirsitul secundamerului. 
-Aici deosebim 4 stari in care se poate afla pagina:
-\begin{itemize}
-	\item lucrul la task - timp 25 min
-	\item pauza normala - 5 min
-	\item pauza lunga - 15 min dupa fiecare al 4-lea task indeplinit
-	\item nedumerire - intrebare utilizatorului dupa ce un ciclu de promodoro + break a fost finisat, daca continua lucrul la acest task sau taskul este finisat.
-\end{itemize}
+Ultima etapa a fost integrarea partii de client cu cea de server. Aici am intilnit o problema neasteptata. Datele trimise prin metoda post a modulului http din angular ajung la server intr-o forma gresita, desi am invetit mai mult timp in investigarea acestei erori, nu am gasit cauza sau solutia problemei, de aceea am recurs la un mic work-around pentru a nu ramine blocat de acest lucru. 
 
-Ultima etapă a fost de a testa aplicația creată pe un emulator, apoi si pe un dispozitiv mobil.
+Modele folosite pentru partea de backend sunt:
+
+Team model:
+\begin{lstlisting}
+{
+    name: String,
+    location: String,
+    founder: String,
+    founded: Number,
+    phone: String,
+    email: String,
+    officialName: String,
+    equipmentColor: String,
+    status: { type: String, default: 'PENDING' },
+    updatedAt: { type: Date, default: Date.now }
+  }
+  \end{lstlisting}
+  
+Feedback model
+\begin{lstlisting}
+{
+    email: String,
+    message: String,
+    updatedAt: { type: Date, default: Date.now }
+  }
+  \end{lstlisting}
 
 \break
 \subsection{Imagini}
@@ -55,71 +76,30 @@ Ultima etapă a fost de a testa aplicația creată pe un emulator, apoi si pe un
 \begin{center}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=10cm]{menu}\\
-		\caption{Menu}
+		\includegraphics[width=15cm]{teams}\\
+		\caption{Teams list}
 		\label{run}
 	\end{figure}
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=10cm]{home}\\
-		\caption{Home page}
+		\includegraphics[width=15cm]{register}\\
+		\caption{Register new team page}
 		\label{jump}
 	\end{figure}
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=10cm]{new-task}\\
-		\caption{Create new task}
+		\includegraphics[width=15cm]{feedback}\\
+		\caption{Feedback page}
 		\label{slide}
 	\end{figure}
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=10cm]{inventory}\\
-		\caption{Inventory list}
+		\includegraphics[width=10cm]{not-found}\\
+		\caption{Not found page}
 		\label{lose}
-	\end{figure}
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{today}\\
-		\caption{Today list}
-		\label{jump}
-	\end{figure}
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{work-state}\\
-		\caption{Promodoro}
-		\label{slide}
-	\end{figure}
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{break-state}\\
-		\caption{Break state}
-		\label{lose}
-	\end{figure}
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{choose-state}\\
-		\caption{Choose state}
-		\label{jump}
-	\end{figure}
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{history}\\
-		\caption{History List}
-		\label{slide}
-	\end{figure}
-	
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=10cm]{all}\\
-		\caption{All List}
-		\label{slide}
 	\end{figure}
 \end{center}
 
