@@ -12,7 +12,6 @@ import { TasksList } from '../tasks-list/tasks-list';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  selectedItem: any;
   total: any;
   estimates: Array<number>;
 
@@ -35,12 +34,6 @@ export class ListPage {
 
   showToday() {
     let modal = this.modalCtrl.create(TasksList, {state: 'Today'});
-    modal.onDidDismiss(task => {
-      console.log(task);
-      if (task && task.title && task.title.length) {
-        this.taskService.create(task)
-      }
-    });
 
     modal.present();
   }

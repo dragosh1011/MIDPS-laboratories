@@ -10,20 +10,16 @@
 
 <ion-content padding>
 
-  <div class="row task-title">
-  {{ task.title }}
-  </div>
+  <h1>{{ task.title }}</h1>
   <div class="row">
-    <timer id="timer" class="countdown" autostart="false" end-time="timer">{{minutes}}:{{sseconds}}</timer>
-  </div>
-
-  <div class="row message">
     {{ message }}
   </div>
 
-  <button *ngIf="continue" class="button button-small button-balanced"
-          ng-click="updateTimer(120000)">
-    Continue
-  </button>
+  <timer #timer [timeInSeconds]="timerValue" (timerFinished)="onTimerFinished($event)" (timerStarted)="onTimerStarted($event)"></timer>
+
+  <div *ngIf="message === pauseMessage">
+    <button ion-button color="secondary" full (click)="dismiss()">No, this task is done</button>
+    <button ion-button color="primary" full (click)="timer.startTimer()">Yes, I want to continue working on task</button>
+  </div>
 
 </ion-content>

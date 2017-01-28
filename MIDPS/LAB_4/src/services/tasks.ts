@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class TasksService {
   public total: any;
   public tasksList: {};
+  public countTodayTasks = 0;
 
   constructor () {
     this.total = {
@@ -17,7 +18,8 @@ export class TasksService {
   create(task): void {
     task.id = Date.now();
     task.status = 'Inventory';
-    task.pomodoros = 0;
+    task.promodoros = 0;
+    task.createdAt = Date.now();
     this.tasksList[task.id] = task
     this.total.inventory++;
   }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams, ModalController } from 'ionic-angular';
 
 import { TasksService } from '../../services/tasks';
+import { Promodoro } from '../promodoro/promodoro';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class TasksList {
   tasks: any;
   title: string;
 
-  constructor(public viewCtrl: ViewController, public navParams: NavParams, private taskService: TasksService) {
+  constructor(public viewCtrl: ViewController, public navParams: NavParams, private taskService: TasksService, public modalCtrl: ModalController,) {
     this.title = this.navParams.get('state');
     if (!this.title) {
       this.title = 'All';
@@ -49,7 +50,16 @@ export class TasksList {
     this.filterData();
   };
 
-  startPomodoro (taskId): void {
+  startPomodoro (task): void {
+    let modal = this.modalCtrl.create(Promodoro, {task: task});
+    modal.onDidDismiss(task => {
+      this.taskService.tasksList[task.id].status = 'History'
+      this.taskService.total.today--;
+      this.taskService.total.history++;
+      task.endedAt = Date.now();
+      this.filterData()
+    });
 
+    modal.present();
   }
 }
