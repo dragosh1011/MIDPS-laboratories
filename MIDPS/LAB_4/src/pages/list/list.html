@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item (click)="showToday($event)">
+      <!--Basic: auto-select the icon based on the platform -->
+      <ion-icon name="list"></ion-icon>
+      Today
+      <div class="item-note" item-right>
+        {{total.today}}
+      </div>
+    </button>
+    <button ion-item (click)="showInventory($event)">
+      <!--Basic: auto-select the icon based on the platform -->
+      <ion-icon name="list"></ion-icon>
+      Inventory
+      <div class="item-note" item-right>
+        {{total.inventory}}
+      </div>
+    </button>
+    <button ion-item (click)="showHistory($event)">
+      <!--Basic: auto-select the icon based on the platform -->
+      <ion-icon name="list"></ion-icon>
+      History
+      <div class="item-note" item-right>
+        {{total.history}}
+      </div>
+    </button>
+    <button ion-item (click)="newTaskModal($event)">
+
+      <!--Basic: auto-select the icon based on the platform -->
+      <ion-icon name="add"></ion-icon>
+      New task
+    </button>
+  </ion-list>
+</ion-content>
