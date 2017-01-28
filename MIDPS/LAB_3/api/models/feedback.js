@@ -11,7 +11,6 @@ const feedbackSchema = new mongoose.Schema(
 const Feedback = connection.model('Feedback', feedbackSchema);
 
 function addFeedback(data) {
-  console.log(data)
   return Feedback.create(data);
 }
 
