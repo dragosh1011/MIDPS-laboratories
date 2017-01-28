@@ -33,7 +33,7 @@
                 <span>Start</span>
               </button>
               <span text-right *ngIf="task.status == 'History'">
-                <span text-right item-right>task.promodoros</span>
+                <span text-right item-right>{{task.promodoros}}</span>
               </span>
             </ion-item>
 
@@ -46,7 +46,7 @@
 
             <ion-item *ngIf="task.status == 'History'">
               <ion-label>Finished </ion-label>
-              <span text-right item-right="">{{task.createdAt| date:'medium'}}</span>
+              <span text-right item-right="">{{task.endedAt| date:'medium'}}</span>
             </ion-item>
       </ion-list>
 </ion-content>
